@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Shop 2.0 Order Form</title>
+    <script>
+        function addOrderToTable() {
+            // Запобігання стандартній відправці форми
+            event.preventDefault();
+
+            // Отримання даних з форми
+            var name = document.getElementById('name').value;
+            var pizzaTopping = document.querySelector('input[name="pizzaTopping"]:checked').value;
+            var pizzaSauce = document.getElementById('pizzaSauce').value;
+            var extras = [];
+            if(document.getElementById('extraCheese').checked) extras.push('Extra Cheese');
+            if(document.getElementById('glutenFreeBase').checked) extras.push('Gluten Free Base');
+            var deliveryInstructions = document.getElementById('deliveryInstructions').value;
+
+            // Створення нового рядка в таблиці
+            var table = document.getElementById('orderTable');
+            var newRow = table.insertRow(-1);
+            newRow.insertCell(0).textContent = name;
+            newRow.insertCell(1).textContent = pizzaTopping;
+            newRow.insertCell(2).textContent = pizzaSauce;
+            newRow.insertCell(3).textContent = extras.join(', ');
+            newRow.insertCell(4).textContent = deliveryInstructions;
+        }
+    </script>
+</head>
+<body>
+
+<!-- Форма замовлення піци -->
+<form onsubmit="addOrderToTable()">
+    <label for="name">Ім'я:</label><br>
+    <input type="text" id="name" name="name"><br>
+
+    <input type="radio" id="supreme" name="pizzaTopping" value="Супер">
+    <label for="supreme">Супер</label><br>
+
+    <input type="radio" id="vegetarian" name="pizzaTopping" value="Вегетаріанська">
+    <label for="vegetarian">Вегетаріанська</label><br>
+
+    <input type="radio" id="hawaiian" name="pizzaTopping" value="Гавайська">
+    <label for="hawaiian">Гавайська</label><br>
+
+    <label for="pizzaSauce">Соус для піци:</label><br>
+    <select id="pizzaSauce" name="pizzaSauce">
+        <option value="Томатний">Томатний</option>
+        <!-- Додати інші варіанти соусів тут -->
+    </select><br>
+
+    <input type="checkbox" id="extraCheese" name="extraCheese">
+    <label for="extraCheese">Додатковий сир</label><br>
+
+    <input type="checkbox" id="glutenFreeBase" name="glutenFreeBase">
+    <label for="glutenFreeBase">Безглютенове тісто</label><br>
+
+    <label for="deliveryInstructions">Інструкції до доставки:</label><br>
+    <textarea id="deliveryInstructions" name="deliveryInstructions"></textarea><br>
+
+    <input type="submit" value="Замовити">
+</form>
+
+<!-- Таблиця з деталями замовлення -->
+<table id="orderTable" border="1">
+    <tr>
+        <th>Назва</th>
+        <th>Тип піци</th>
+        <th>Соус</th>
+        <th>Додаткові опції</th>
+        <th>Інструкція</th>
+    </tr>
+    <!-- Тут будуть додані нові рядки з деталями замовлення -->
+</table>
+
+</body>
+</html>
